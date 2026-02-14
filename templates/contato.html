@@ -13,12 +13,29 @@
 <body id="contatos">
     <main>
         <h2>Entre em contato</h2>
-        <form method="POST" action="/contato">
+        <form id="formContato" method="POST" action="/contato">
             <input type="text" name="nome" placeholder="Seu nome" required><br>
             <input type="email" name="email" placeholder="Seu email" required><br>
             <textarea name="mensagem" placeholder="Sua mensagem"></textarea><br>
             <button type="submit">Enviar</button>
         </form>
+
+        <!-- Mensagem de retorno -->
+        <div id="mensagemRetorno" style="margin-top:10px; color:green;"></div>
     </main>
+
+    <!-- Script para capturar resposta da API -->
+    <script>
+    document.getElementById("formContato").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch("/contato", {
+            method: "POST",
+            body: formData
+        });
+        const result = await response.json();
+        document.getElementById("mensagemRetorno").innerText = result.mensagem;
+    });
+    </script>
 </body>
 </html>
