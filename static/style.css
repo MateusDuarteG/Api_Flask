@@ -1,0 +1,87 @@
+/* Fonte geral */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Cabeçalho */
+header {
+  background-color: #1E88E5; /* azul escuro */
+  color: white;
+  padding: 20px;
+  text-align: left;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Menu */
+header nav {
+  margin-top: 10px;
+  text-align: center;
+}
+
+header nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+header nav a:hover {
+  color: #FFD700; /* efeito hover dourado */
+  text-decoration: underline;
+}
+
+/* Conteúdo principal */
+main {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Estilos específicos por página */
+body#index {
+  background-color: #E3F2FD; /* azul claro */
+  color: #1E88E5;
+}
+
+body#projetos {
+  background-color: #E8F5E9; /* verde claro */
+  color: #388E3C;
+}
+
+body#contatos {
+  background-color: #FFCDD2; /* coral */
+  color: #C62828;
+}
+
+/* Estilo específico para cada página */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+/* Conteúdo principal centralizado */
+main {
+  text-align: center;
+  margin-top: 40px;
+}
+/* Centralizar conteúdo das páginas */
+body#projetos, 
+body#contatos {
+  display: flex;
+  justify-content: center;   /* centraliza horizontalmente */
+  align-items: center;       /* centraliza verticalmente */
+  min-height: 100vh;         /* ocupa toda a altura da tela */
+  flex-direction: column;    /* organiza os elementos em coluna */
+  text-align: center;        /* centraliza o texto */
+}
+
+body#projetos main,
+body#contatos main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centraliza horizontalmente */
+  justify-content: center; /* centraliza verticalmente */
+  min-height: 80vh;      /* ocupa quase toda a tela */
+  text-align: center;
+}
