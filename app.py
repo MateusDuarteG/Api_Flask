@@ -1,30 +1,48 @@
-import json
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-
-@app.route("/projetos")
-def projetos():
-    with open("projects.json", "r", encoding="utf-8") as f:
-        projects = json.load(f)
-    return render_template("projetos.html", projects=projects)
+agent = [
+    {'id': 1, 'Nome': 'Mateus Duarte', 'Matricula': '147884'},
+    {'id': 2, 'Nome': 'Pricila Brito', 'Matricula': '1456788'},
+    {'id': 3, 'Nome': 'Romeu', 'Matricula': '1456458'}
+]
 
 
-@app.route("/contato", methods=["GET", "POST"])
-def contato():
-    if request.method == "POST":
-        nome = request.form["nome"]
-        email = request.form["email"]
-        mensagem = request.form["mensagem"]
-        print(f"Mensagem recebida de {nome} ({email}): {mensagem}")
-        return "Obrigado pelo contato!"
-    return render_template("contato.html")
+@app.route('/agent', methods=['GET'])
+def obter_agent():
+    return jsonify(agent)
+
+
+@app.route('/agent/<int:id>', methods=['GET'])
+def obter_agent_id(id):
+    for agents in agent:
+        if agents.get('id') == id:
+            return jsonify(agents)
+
+
+@app.route('/agent/<int:id>', methods=['PUT'])
+def editar_agent_id(id):
+    agent_alterado = request.get_json()
+    for indice, agents in enumerate(agent):
+        if agents.get('id') == id:
+            agent[indice].update(agent_alterado)
+            return jsonify(agent[indice])
+
+
+@app.route('/agent', methods=['POST'])
+def incluir_novo_agent():
+    novo_agents = request.get_json()
+    agent.append(novo_agents)
+    return jsonify(agent)
+
+
+@app.route('/agent/<int:id>', methods=['DELETE'])
+def excluir_agnt(id):
+    for indice, agents in enumerate(agent):
+        if agents.get('id') == id:
+            del agent[indice]
+    return jsonify(agent)
 
 
 if __name__ == "__main__":
